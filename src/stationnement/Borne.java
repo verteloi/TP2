@@ -1,22 +1,22 @@
 package stationnement;
 
 public class Borne {
-    private String transactionCourante;
+    private Transaction transactionCourante;
     private double banque;
 
     private static double PRIX_G = 4.25;      // $/h
     private static double PRIX_SQ = 2.25;     // $/h
 
-    public Borne(String transactionCourante, double banque) {
-        this.transactionCourante = transactionCourante;
-        this.banque = banque;
+    public Borne() {
+        transactionCourante = null;
+        banque = 0;
     }
 
-    public String getTransactionCourante() {
+    public Transaction getTransactionCourante() {
         return transactionCourante;
     }
 
-    public void setTransactionCourante(String transactionCourante) {
+    public void setTransactionCourante(Transaction transactionCourante) {
         this.transactionCourante = transactionCourante;
     }
 
@@ -34,7 +34,7 @@ public class Borne {
         return montantTotal;
     }
 
-    public boolean validerBorne(String borne) {
+    public boolean validerPlace(String borne) {
         String regex = "^(G|SQ)\\d{3}$";
         return borne.matches(regex);
     }

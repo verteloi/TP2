@@ -37,6 +37,7 @@ public class CarteCredit {
 
     public void setSolde(double solde) {
         this.solde = solde;
+        // METTRE UN RANDOM ICI ENTRE 100 et 500
     }
 
     public boolean verifierExpiration(YearMonth expiration) {

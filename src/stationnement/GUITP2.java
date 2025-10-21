@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -45,7 +46,7 @@ public class GUITP2 {
 
     // variables utiles pour vous
     String place =""; //place de stationnement choisie
-    Borne borne; // borne à créer dans le constructeur
+    Borne b; // borne à créer dans le constructeur
 
     //formatage
     public GUITP2() throws ParseException {
@@ -125,7 +126,7 @@ public class GUITP2 {
         boutonAnnuler.addActionListener(ecouteurControles);
         boutonRapport.addActionListener(ecouteurControles);
 
-        //1. créer objet Borne
+        b = new Borne();
 
     }
 
@@ -205,24 +206,38 @@ public class GUITP2 {
         champMessage.setText(place);
     }
 
+
     private void boutonEntree_actionPerformed() {
-        //3. à coder
+
+        if (b.validerPlace(place)) {
+            Transaction t = new Transaction(place);
+
+            b.setTransactionCourante(t);
+
+        }
     }
 
     private void bouton25_actionPerformed() {
-        //4. à coder
+        if (b.getTransactionCourante() != null) {
+            b.getTransactionCourante().ajouter25();
+        }
     }
 
     private void bouton100_actionPerformed() {
-        //5. à coder
+        if (b.getTransactionCourante() != null) {
+            b.getTransactionCourante().ajouter100();
+        }
     }
 
     private void bouton200_actionPerformed() {
-        //6. à coder
+        if (b.getTransactionCourante() != null) {
+            b.getTransactionCourante().ajouter200();
+        }
     }
 
     private void boutonValiderDateExp_actionPerformed(){
         //7. à coder
+        YearMonth dateExpirtation = YearMonth.of(2023, 12);
     }
 
     private void boutonPlus_actionPerformed() {
