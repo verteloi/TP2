@@ -1,3 +1,5 @@
+package stationnement;
+
 public class Piece {
     private double valeur;
 

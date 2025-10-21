@@ -1,15 +1,11 @@
+package stationnement;
+
 public class Borne {
     private String transactionCourante;
     private double banque;
 
-    private static double PRIX_G = 4.00;      // $/h
-    private static double PRIX_SQ = 3.00;     // $/h
-    private static int DUREE_MAX = 120;        // minutes
-
-    private static int HEURE_DEBUT_G = 9;
-    private static int HEURE_FIN_G = 21;
-    private static int HEURE_DEBUT_SQ = 8;
-    private static int HEURE_FIN_SQ = 18;
+    private static double PRIX_G = 4.25;      // $/h
+    private static double PRIX_SQ = 2.25;     // $/h
 
     public Borne(String transactionCourante, double banque) {
         this.transactionCourante = transactionCourante;
