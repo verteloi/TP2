@@ -211,8 +211,9 @@ public class GUITP2 {
 
         if (b.validerPlace(place)) {
             Transaction t = new Transaction(place);
-            b.getTransactionCourante().getHeureDebut();
+            // b.getTransactionCourante().getHeureDebut();
             b.setTransactionCourante(t);
+            champMessage.setText("Borne valide!");
 
         }
     }
@@ -220,18 +221,21 @@ public class GUITP2 {
     private void bouton25_actionPerformed() {
         if (b.getTransactionCourante() != null) {
             b.getTransactionCourante().ajouter25();
+            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents, donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
         }
     }
 
     private void bouton100_actionPerformed() {
         if (b.getTransactionCourante() != null) {
             b.getTransactionCourante().ajouter100();
+            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents, donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
         }
     }
 
     private void bouton200_actionPerformed() {
         if (b.getTransactionCourante() != null) {
             b.getTransactionCourante().ajouter200();
+            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents, donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
         }
     }
 
@@ -243,7 +247,7 @@ public class GUITP2 {
     private void boutonPlus_actionPerformed() {
         if (b.getTransactionCourante() != null) {
             b.getTransactionCourante().ajouter25();
-            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + "$ dans la borne ce qui équivaut a" + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
+            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
         }
 
 
@@ -252,7 +256,7 @@ public class GUITP2 {
     private void boutonMoins_actionPerformed(){
         if (b.getTransactionCourante() != null) {
             b.getTransactionCourante().retirer25();
-            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + "$ dans la borne ce qui équivaut a X minutes");
+            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
         }
     }
 
@@ -266,6 +270,9 @@ public class GUITP2 {
         //      si oui faire la transaction et retirer montant au solde
         //      si non envoyer un message
         // ajouter le montant a la banque
+
+
+
         // mettre la transaction courante a null
 
     }
@@ -278,7 +285,7 @@ public class GUITP2 {
 
     private void boutonRapport_actionPerformed() {
         if (b.getTransactionCourante() != null) {
-            System.out.println("Il y avait " + b.genererRapport(b.getBanque()) + "$ dans la banque");
+            champMessage.setText("Vous avez retiré " + b.genererRapport(b.getBanque()) + " cents de la banque");
             b.setBanque(0);
         }
     }

@@ -61,21 +61,26 @@ public class Borne {
         return cout;
     }
 
-    public double calculerMinutes(double montant, String place) {
+    public int calculerMinutes(double montant, String place) {
         double minutes = 0;
 
         if (borneType(place) == "G") {
-            minutes = (montant / 4.25) * 60;
+            minutes = (montant / 425) * 60;
         } else {
-            minutes = (montant / 2.25) * 60;
+            minutes = (montant / 225) * 60;
         }
 
-        return minutes;
+        //minutes = (int)minutes;
+        return (int)minutes;
     }
 
     public boolean tempsMaximum (int minutes) {
         if (minutes <= 120)
             return true;
         return false;
+    }
+
+    public void terminerTransaction() {
+        banque+= transactionCourante.getMontant();
     }
 }

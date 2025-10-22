@@ -7,7 +7,6 @@ public class Transaction {
     private String typePaiement = "inconnu";
     private LocalDateTime heureDebut;
     private LocalDateTime heureFin;
-
     private double montant;
 
     public Transaction(String placeStationnement) {
