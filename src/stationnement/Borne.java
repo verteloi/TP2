@@ -61,6 +61,18 @@ public class Borne {
         return cout;
     }
 
+    public double calculerMinutes(double montant, String place) {
+        double minutes = 0;
+
+        if (borneType(place) == "G") {
+            minutes = (montant / 4.25) * 60;
+        } else {
+            minutes = (montant / 2.25) * 60;
+        }
+
+        return minutes;
+    }
+
     public boolean tempsMaximum (int minutes) {
         if (minutes <= 120)
             return true;

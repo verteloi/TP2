@@ -211,7 +211,7 @@ public class GUITP2 {
 
         if (b.validerPlace(place)) {
             Transaction t = new Transaction(place);
-
+            b.getTransactionCourante().getHeureDebut();
             b.setTransactionCourante(t);
 
         }
@@ -241,27 +241,46 @@ public class GUITP2 {
     }
 
     private void boutonPlus_actionPerformed() {
-        //8. à coder
+        if (b.getTransactionCourante() != null) {
+            b.getTransactionCourante().ajouter25();
+            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + "$ dans la borne ce qui équivaut a" + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
+        }
+
+
     }
 
     private void boutonMoins_actionPerformed(){
-        //9. à coder
+        if (b.getTransactionCourante() != null) {
+            b.getTransactionCourante().retirer25();
+            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + "$ dans la borne ce qui équivaut a X minutes");
+        }
     }
 
     private void boutonMax_actionPerformed() {
-        //10. à coder
+        //
     }
 
     private void boutonOK_actionPerformed() {
-        // 11 à coder
+        // verifier l'utilisateur paye carte ou comptant
+        // si carte -> verifier si solde est assez grand
+        //      si oui faire la transaction et retirer montant au solde
+        //      si non envoyer un message
+        // ajouter le montant a la banque
+        // mettre la transaction courante a null
+
     }
 
     private void boutonAnnuler_actionPerformed() {
-       //12 à coder
+        if (b.getTransactionCourante() != null) {
+
+        }
     }
 
     private void boutonRapport_actionPerformed() {
-        //13 à coder
+        if (b.getTransactionCourante() != null) {
+            System.out.println("Il y avait " + b.genererRapport(b.getBanque()) + "$ dans la banque");
+            b.setBanque(0);
+        }
     }
 
     public static void main(String[] args) {
