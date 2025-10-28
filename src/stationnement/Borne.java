@@ -1,5 +1,9 @@
 package stationnement;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.Year;
+
 public class Borne {
     private Transaction transactionCourante;
     private double banque;
@@ -39,9 +43,31 @@ public class Borne {
         return borne.matches(regex);
     }
 
+    public boolean verifierHeure(String borne) {
+        LocalDateTime current = LocalDateTime.now();
+        if (borneType(borne).equals("G")) {
+            if (current.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                return current.getHour() >= 13 && current.getHour() < 18;
+            } else if (current.getDayOfWeek() == DayOfWeek.SATURDAY) {
+                return current.getHour() >= 9 && current.getHour() < 23;
+            }
+            else {
+                return current.getHour() >= 8 && current.getHour() < 23;
+            }
+        } else {
+            if (current.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                return false;
+            } else if (current.getDayOfWeek() == DayOfWeek.SATURDAY) {
+                return current.getHour() >= 9 && current.getHour() < 18;
+            } else {
+                return current.getHour() >= 9 && current.getHour() < 21;
+            }
+        }
+    }
+
     public String borneType (String borne) {
         String type = String.valueOf(borne.charAt(0));
-        if (type == "G") {
+        if (type.equals("G")) {
             return "G";
         } else return "SQ";
     }
@@ -64,20 +90,29 @@ public class Borne {
     public int calculerMinutes(double montant, String place) {
         double minutes = 0;
 
-        if (borneType(place) == "G") {
+        if (borneType(place).equals("G")) {
             minutes = (montant / 425) * 60;
         } else {
             minutes = (montant / 225) * 60;
         }
 
-        //minutes = (int)minutes;
         return (int)minutes;
     }
 
     public boolean tempsMaximum (int minutes) {
-        if (minutes <= 120)
+        if (minutes < 120)
             return true;
         return false;
+    }
+
+    public double ajouterMaximum(double montant, String place) {
+        if (borneType(place).equals("G")) {
+            montant = 850;
+        } else {
+            montant = 450;
+        }
+
+        return montant;
     }
 
     public void terminerTransaction() {

@@ -9,10 +9,9 @@ public class CarteCredit {
     private YearMonth expiration;
     private double solde;
 
-    public CarteCredit(String numCarte, YearMonth expiration, double solde) {
+    public CarteCredit(String numCarte, YearMonth expiration) {
         this.numCarte = numCarte;
         this.expiration = expiration;
-        this.solde = solde;
     }
 
     public String getNumCarte() {
@@ -36,8 +35,8 @@ public class CarteCredit {
     }
 
     public void setSolde(double solde) {
-        this.solde = solde;
-        // METTRE UN RANDOM ICI ENTRE 100 et 500
+        //mettre random 100 et 500
+        this.solde = Math.random() * 100;
     }
 
     public boolean verifierExpiration(YearMonth expiration) {

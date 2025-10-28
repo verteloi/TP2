@@ -202,23 +202,33 @@ public class GUITP2 {
     public void boutonNumeroLettre_actionPerformed(String lettreChiffre) {
         // 2. À compléter, afficher la place choisie dans le champMessage
         // à partir de la lettre ou du chiffre cliqué en paramètre
-        place += lettreChiffre;
-        champMessage.setText(place);
+        if (b.getTransactionCourante() == null) {
+            place += lettreChiffre;
+            champMessage.setText(place);
+        }
     }
-
 
     private void boutonEntree_actionPerformed() {
 
-        if (b.validerPlace(place)) {
-            Transaction t = new Transaction(place);
-            // b.getTransactionCourante().getHeureDebut();
-            b.setTransactionCourante(t);
-            champMessage.setText("Borne valide!");
-
+        if (b.getTransactionCourante() == null) {
+            if (b.validerPlace(place)) {
+                if (b.verifierHeure(place)) {
+                    Transaction t = new Transaction(place);
+                    b.setTransactionCourante(t);
+                    champMessage.setText("borne valide !");
+                } else {
+                    champMessage.setText("Heures non-payante !");
+                    place = "";
+                }
+            } else {
+                champMessage.setText("Borne invalide ! Veuillez Réessayer.");
+                place = "";
+            }
         }
     }
 
     private void bouton25_actionPerformed() {
+        b.verifierHeure(place);
         if (b.getTransactionCourante() != null) {
             b.getTransactionCourante().ajouter25();
             champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents, donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
@@ -246,22 +256,24 @@ public class GUITP2 {
 
     private void boutonPlus_actionPerformed() {
         if (b.getTransactionCourante() != null) {
-            b.getTransactionCourante().ajouter25();
+            if (b.tempsMaximum(b.calculerMinutes(b.getTransactionCourante().getMontant(), place)))
+                b.getTransactionCourante().carteAjouter25();
             champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
         }
-
-
     }
 
     private void boutonMoins_actionPerformed(){
         if (b.getTransactionCourante() != null) {
-            b.getTransactionCourante().retirer25();
+            b.getTransactionCourante().carteRetirer25();
             champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
         }
     }
 
     private void boutonMax_actionPerformed() {
-        //
+        if (b.getTransactionCourante() != null) {
+            b.getTransactionCourante().setMontant(b.ajouterMaximum(b.getTransactionCourante().getMontant(), place));
+            champMessage.setText("Vous avez mis " + b.getTransactionCourante().getMontant() + " cents donc " + b.calculerMinutes(b.getTransactionCourante().getMontant(),place) + " minutes");
+        }
     }
 
     private void boutonOK_actionPerformed() {
@@ -271,6 +283,12 @@ public class GUITP2 {
         //      si non envoyer un message
         // ajouter le montant a la banque
 
+        if (b.getTransactionCourante().getTypePaiement().equals("carte")) {
+
+        } else {
+            b.terminerTransaction();
+            zoneRecu.setText("Vous avez retiré : " + b.getBanque());
+        }
 
 
         // mettre la transaction courante a null
@@ -279,12 +297,14 @@ public class GUITP2 {
 
     private void boutonAnnuler_actionPerformed() {
         if (b.getTransactionCourante() != null) {
-
+            b.setTransactionCourante(null);
+            champMessage.setText("Vous avez annulé la transaction !");
         }
     }
 
     private void boutonRapport_actionPerformed() {
         if (b.getTransactionCourante() != null) {
+            place = "";
             champMessage.setText("Vous avez retiré " + b.genererRapport(b.getBanque()) + " cents de la banque");
             b.setBanque(0);
         }

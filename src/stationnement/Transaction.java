@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Transaction {
     private String placeStationnement;
+
     private String typePaiement = "inconnu";
     private LocalDateTime heureDebut;
     private LocalDateTime heureFin;
@@ -35,6 +36,10 @@ public class Transaction {
 
     public void setPlaceStationnement(String placeStationnement) {
         this.placeStationnement = placeStationnement;
+    }
+
+    public String getTypePaiement() {
+        return typePaiement;
     }
 
     public double getMontant() {
@@ -69,9 +74,18 @@ public class Transaction {
             typePaiement = "carte";
     }
 
+    public void carteRetirer25() {
+        this.montant -= 25;
+        if (typePaiement == "inconnu")
+            typePaiement = "carte";
+    }
+
     public void retirer25() {
         this.montant -= 25;
         if (typePaiement == "inconnu")
             typePaiement = "carte";
     }
+
+
+
 }
