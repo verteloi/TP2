@@ -35,17 +35,7 @@ public class CarteCredit {
     }
 
     public void setSolde(double solde) {
-        //mettre random 100 et 500
-        this.solde = Math.random() * 100;
-    }
-
-    public boolean verifierExpiration(YearMonth expiration) {
-        if (now().getYear() <= expiration.getYear()) {
-            if (now().getMonthValue() <= expiration.getMonthValue()) {
-                return true;
-            }
-        }
-        return false;
+        this.solde = 100 + Math.random() * 500;
     }
 
     public void deduireMontant (double montant) {

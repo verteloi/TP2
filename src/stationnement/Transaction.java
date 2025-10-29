@@ -6,24 +6,10 @@ public class Transaction {
     private String placeStationnement;
 
     private String typePaiement = "inconnu";
-    private LocalDateTime heureDebut;
-    private LocalDateTime heureFin;
     private double montant;
 
     public Transaction(String placeStationnement) {
         this.placeStationnement = placeStationnement;
-    }
-
-    public LocalDateTime getHeureFin() {
-        return heureFin;
-    }
-
-    public LocalDateTime getHeureDebut() {
-        return heureDebut;
-    }
-
-    public void setHeureDebut(LocalDateTime heureDebut) {
-        this.heureDebut = LocalDateTime.now();
     }
 
     public void setHeureFin(LocalDateTime heureFin) {
@@ -79,13 +65,4 @@ public class Transaction {
         if (typePaiement == "inconnu")
             typePaiement = "carte";
     }
-
-    public void retirer25() {
-        this.montant -= 25;
-        if (typePaiement == "inconnu")
-            typePaiement = "carte";
-    }
-
-
-
 }

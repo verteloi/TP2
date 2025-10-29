@@ -3,6 +3,9 @@ package stationnement;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.Year;
+import java.time.YearMonth;
+
+import static java.time.YearMonth.now;
 
 public class Borne {
     private Transaction transactionCourante;
@@ -118,4 +121,19 @@ public class Borne {
     public void terminerTransaction() {
         banque+= transactionCourante.getMontant();
     }
+
+//    public boolean verifierExpiration(CarteCredit carte) {
+//        if (now().getYear() <= expiration.getYear()) {
+//            if (now().getMonthValue() <= expiration.getMonthValue()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public boolean validerCarte(String dateExp) {
+////        YearMonth exp = YearMonth.of(12, 24);
+////        CarteCredit c = new CarteCredit(213123, exp)
+//
+//    }
 }

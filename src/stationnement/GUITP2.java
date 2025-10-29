@@ -209,7 +209,6 @@ public class GUITP2 {
     }
 
     private void boutonEntree_actionPerformed() {
-
         if (b.getTransactionCourante() == null) {
             if (b.validerPlace(place)) {
                 if (b.verifierHeure(place)) {
@@ -251,7 +250,10 @@ public class GUITP2 {
 
     private void boutonValiderDateExp_actionPerformed(){
         //7. à coder
-        YearMonth dateExpirtation = YearMonth.of(2023, 12);
+//        YearMonth dateExpirtation = YearMonth.of(2023, 12);
+
+//        CarteCredit carte = new CarteCredit(champNumeroCarte.getText(), champDateExp.getText());
+//        b.validerCarte(champDateExp.getText(),champNumeroCarte.getText());
     }
 
     private void boutonPlus_actionPerformed() {
@@ -299,11 +301,12 @@ public class GUITP2 {
         if (b.getTransactionCourante() != null) {
             b.setTransactionCourante(null);
             champMessage.setText("Vous avez annulé la transaction !");
+            place = "";
         }
     }
 
     private void boutonRapport_actionPerformed() {
-        if (b.getTransactionCourante() != null) {
+        if (b.getTransactionCourante() == null) {
             place = "";
             champMessage.setText("Vous avez retiré " + b.genererRapport(b.getBanque()) + " cents de la banque");
             b.setBanque(0);
